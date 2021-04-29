@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/main_dest">
+
+    <fragment
+        android:id="@+id/main_dest"
+        android:name="com.lirenqi.navigationdemo.MainFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@+id/flow_step_one_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/flow_step_one_dest"
+        android:name="com.lirenqi.navigationdemo.FlowStepFragment"
+        android:label="@string/step_one"
+        tools:layout="@layout/fragment_flow_step_one" >
+
+        <argument
+            android:name="flowStepNumber"
+            app:argType="integer"
+            android:defaultValue="1"/>
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/flow_step_two_dest" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flow_step_two_dest"
+        android:name="com.lirenqi.navigationdemo.FlowStepFragment"
+        android:label="@string/step_two"
+        tools:layout="@layout/fragment_flow_step_two" >
+
+        <argument
+            android:name="flowStepNumber"
+            app:argType="integer"
+            android:defaultValue="2"/>
+
+        <action
+            android:id="@+id/next_action"
+            app:popUpTo="@id/main_dest"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/deep_link_dest"
+        android:name="com.lirenqi.navigationdemo.DeepLinkFragment"
+        android:label="@string/deep_link"
+        tools:layout="@layout/fragment_deep_link" >
+        <argument
+            android:name="myArg"
+            android:defaultValue="Android!"/>
+
+        <deepLink app:uri="www.example.com/{myArg}" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings_dest"
+        android:name="com.lirenqi.navigationdemo.SettingsFragment"
+        android:label="@string/settings" />
+</navigation>
